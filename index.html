@@ -1,0 +1,1572 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="비전공자와 초보 개발자를 위한 바이브코딩 풀스택 개발 프로세스 안내 페이지" />
+  <title>바이브코딩 개발 가이드</title>
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --surface:#ffffff;
+      --surface-2:#eef3ff;
+      --text:#172033;
+      --muted:#5e6b85;
+      --line:#dce3f0;
+      --primary:#4f46e5;
+      --primary-2:#7c3aed;
+      --accent:#0ea5e9;
+      --success:#15803d;
+      --warning:#b45309;
+      --danger:#b91c1c;
+      --shadow:0 14px 40px rgba(29,42,78,.10);
+      --radius:20px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(79,70,229,.10), transparent 30%),
+        radial-gradient(circle at 90% 10%, rgba(14,165,233,.10), transparent 25%),
+        var(--bg);
+      line-height:1.7;
+    }
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 32px));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(246,248,252,.88);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(220,227,240,.8);
+    }
+    .topbar-inner{
+      min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:18px
+    }
+    .brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.03em}
+    .brand-mark{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--accent));
+      box-shadow:0 8px 18px rgba(79,70,229,.25);
+    }
+    nav{display:flex;gap:6px;flex-wrap:wrap}
+    nav a{
+      text-decoration:none;color:var(--muted);font-size:14px;font-weight:700;
+      padding:8px 11px;border-radius:10px
+    }
+    nav a:hover{background:#fff;color:var(--primary)}
+    .hero{padding:74px 0 46px}
+    .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:34px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;
+      background:#e9e8ff;color:#4338ca;font-size:14px;font-weight:800
+    }
+    h1{
+      font-size:clamp(40px,6vw,72px);line-height:1.08;letter-spacing:-.055em;
+      margin:20px 0 18px
+    }
+    .gradient-text{
+      background:linear-gradient(135deg,var(--primary),var(--primary-2),var(--accent));
+      -webkit-background-clip:text;background-clip:text;color:transparent
+    }
+    .hero p{font-size:19px;color:var(--muted);max-width:760px;margin:0 0 26px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      border:0;border-radius:13px;padding:12px 16px;font-weight:850;cursor:pointer;
+      text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px
+    }
+    .btn-primary{background:var(--primary);color:#fff;box-shadow:0 10px 24px rgba(79,70,229,.22)}
+    .btn-secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
+    .hero-card{
+      background:linear-gradient(160deg,#181b35,#2d315c);
+      color:#fff;border-radius:28px;padding:26px;box-shadow:0 28px 65px rgba(23,32,51,.25);
+      transform:rotate(1deg)
+    }
+    .hero-card h2{margin:0 0 12px;font-size:22px}
+    .flow-mini{display:grid;gap:10px;margin-top:20px}
+    .flow-mini div{
+      display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:center;
+      background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+      padding:11px;border-radius:14px
+    }
+    .flow-mini b{
+      width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.15);
+      display:grid;place-items:center
+    }
+    section{padding:54px 0}
+    .section-head{margin-bottom:24px}
+    .section-head h2{font-size:clamp(29px,4vw,44px);line-height:1.2;letter-spacing:-.04em;margin:0 0 10px}
+    .section-head p{margin:0;color:var(--muted);font-size:17px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+      padding:24px;box-shadow:0 8px 24px rgba(29,42,78,.05)
+    }
+    .card h3{margin:0 0 10px;font-size:22px;letter-spacing:-.025em}
+    .card p{margin:0;color:var(--muted)}
+    .concept-icon{
+      width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+      margin-bottom:18px;font-size:24px;background:var(--surface-2)
+    }
+    .concept-flow{
+      display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;gap:16px;margin-top:20px
+    }
+    .concept-box{
+      padding:20px;border:1px solid var(--line);border-radius:18px;background:#fff
+    }
+    .arrow{text-align:center;font-size:30px;color:var(--primary);font-weight:900}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      border:1px solid var(--line);background:#f9fbff;color:#41506f;
+      padding:5px 9px;border-radius:999px;font-size:13px;font-weight:700
+    }
+    .principles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .principle{
+      background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px
+    }
+    .principle b{display:block;font-size:18px;margin-bottom:7px}
+    .principle span{color:var(--muted);font-size:14px}
+    .process-layout{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start}
+    .side-nav{
+      position:sticky;top:92px;background:#fff;border:1px solid var(--line);
+      border-radius:20px;padding:14px;box-shadow:0 8px 24px rgba(29,42,78,.05)
+    }
+    .side-nav a{
+      display:flex;gap:10px;align-items:center;text-decoration:none;
+      padding:11px 12px;border-radius:12px;color:var(--muted);font-weight:750;font-size:14px
+    }
+    .side-nav a:hover{background:var(--surface-2);color:var(--primary)}
+    .side-nav .num{
+      width:28px;height:28px;border-radius:9px;background:#eef0ff;color:#4338ca;
+      display:grid;place-items:center;font-size:12px;font-weight:900
+    }
+    .steps{display:grid;gap:24px}
+    .step{
+      scroll-margin-top:90px;background:#fff;border:1px solid var(--line);
+      border-radius:24px;padding:28px;box-shadow:var(--shadow)
+    }
+    .step-top{display:flex;gap:18px;align-items:flex-start}
+    .step-num{
+      flex:0 0 58px;width:58px;height:58px;border-radius:18px;color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      display:grid;place-items:center;font-size:21px;font-weight:950
+    }
+    .step-title h3{margin:0;font-size:28px;letter-spacing:-.035em}
+    .step-title p{margin:6px 0 0;color:var(--muted)}
+    .step-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+    .panel{
+      border:1px solid var(--line);border-radius:16px;padding:18px;background:#fbfcff
+    }
+    .panel h4{margin:0 0 10px;font-size:16px}
+    .panel ul{margin:0;padding-left:19px;color:#4f5c76}
+    .panel li+li{margin-top:6px}
+    .deliverable{border-left:4px solid var(--success)}
+    .mistake{border-left:4px solid var(--danger)}
+    .prompt{
+      margin-top:18px;background:#15182d;color:#edf2ff;border-radius:16px;padding:18px;
+      position:relative;white-space:pre-wrap;font-size:14px;line-height:1.75
+    }
+    .prompt-label{color:#a5b4fc;font-weight:850;margin-bottom:7px;display:block}
+    .copy-btn{
+      position:absolute;right:12px;top:12px;border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.09);color:#fff;border-radius:9px;padding:6px 9px;
+      cursor:pointer;font-size:12px;font-weight:750
+    }
+    .done{
+      display:flex;gap:10px;align-items:flex-start;margin-top:18px;padding:14px 16px;
+      border-radius:14px;background:#ecfdf3;border:1px solid #bbf7d0;color:#166534;font-weight:700
+    }
+    .qa-table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden}
+    .qa-table th,.qa-table td{border-bottom:1px solid var(--line);padding:14px;text-align:left;vertical-align:top}
+    .qa-table th{background:#f1f5fb;font-size:14px}
+    .qa-table td{color:#4f5c76}
+    .checklist-wrap{
+      display:grid;grid-template-columns:1fr .8fr;gap:22px;align-items:start
+    }
+    .checklist{
+      background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px
+    }
+    .check-item{
+      display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed var(--line)
+    }
+    .check-item:last-child{border-bottom:0}
+    .check-item input{margin-top:5px;transform:scale(1.2);accent-color:var(--primary)}
+    .progress-card{
+      position:sticky;top:92px;background:linear-gradient(160deg,#ffffff,#eef2ff);
+      border:1px solid var(--line);border-radius:20px;padding:24px
+    }
+    .progress-bar{height:12px;background:#dfe5f2;border-radius:999px;overflow:hidden;margin:14px 0}
+    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:.25s}
+    .progress-number{font-size:38px;font-weight:950;letter-spacing:-.04em}
+    .template{
+      background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px
+    }
+    .template textarea{
+      width:100%;min-height:470px;border:1px solid var(--line);border-radius:14px;
+      padding:16px;resize:vertical;background:#fbfcff;color:#263149;line-height:1.7
+    }
+    .notice{
+      border:1px solid #fed7aa;background:#fff7ed;color:#9a3412;
+      border-radius:18px;padding:20px
+    }
+    .notice h3{margin:0 0 8px}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    footer{padding:40px 0 70px;color:var(--muted);font-size:14px}
+    .footer-box{
+      background:#11152a;color:#dbe5ff;border-radius:24px;padding:28px;
+      display:flex;justify-content:space-between;gap:20px;align-items:center
+    }
+    .footer-box strong{font-size:22px;color:#fff}
+    .small{font-size:13px;color:var(--muted)}
+    .badge{
+      display:inline-flex;border-radius:999px;background:#eef0ff;color:#4338ca;
+      padding:4px 9px;font-size:12px;font-weight:850;margin-bottom:8px
+    }
+    @media (max-width:920px){
+      nav{display:none}
+      .hero-grid,.process-layout,.checklist-wrap,.two-col{grid-template-columns:1fr}
+      .hero-card{transform:none}
+      .side-nav,.progress-card{position:static}
+      .side-nav{display:grid;grid-template-columns:repeat(2,1fr)}
+      .grid-3,.principles{grid-template-columns:repeat(2,1fr)}
+      .concept-flow{grid-template-columns:1fr}
+      .arrow{transform:rotate(90deg)}
+    }
+    @media (max-width:620px){
+      .wrap{width:min(100% - 20px,var(--max))}
+      .hero{padding-top:42px}
+      h1{font-size:40px}
+      .grid-3,.principles,.step-grid{grid-template-columns:1fr}
+      .step{padding:20px}
+      .step-top{gap:12px}
+      .step-num{width:48px;height:48px;flex-basis:48px}
+      .step-title h3{font-size:23px}
+      .side-nav{grid-template-columns:1fr}
+      .footer-box{display:block}
+    }
+
+    .term-note{
+      display:inline-flex;margin-left:8px;padding:4px 8px;border-radius:999px;
+      background:#eef0ff;color:#5145cd;font-size:12px;font-weight:850;vertical-align:middle
+    }
+    .demo-shell{
+      margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:24px;
+      padding:24px;box-shadow:var(--shadow)
+    }
+    .demo-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}
+    .demo-head h3{margin:0 0 5px;font-size:24px;letter-spacing:-.03em}
+    .demo-head p{margin:0;color:var(--muted)}
+    .simulation-badge{
+      flex:0 0 auto;background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;
+      padding:7px 10px;border-radius:999px;font-size:12px;font-weight:850
+    }
+    .demo-grid{display:grid;grid-template-columns:1fr 130px 1fr;gap:16px;align-items:stretch}
+    .demo-zone{border:1px solid var(--line);border-radius:18px;padding:19px;background:#fbfcff}
+    .demo-zone.front{border-top:5px solid var(--accent)}
+    .demo-zone.back{border-top:5px solid var(--primary-2)}
+    .demo-zone h4{margin:0 0 4px;font-size:19px}
+    .demo-zone .zone-desc{margin:0 0 15px;color:var(--muted);font-size:14px}
+    .field{display:grid;gap:6px;margin-bottom:12px}
+    .field label{font-size:13px;font-weight:850;color:#44516d}
+    .field input{
+      width:100%;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:#fff
+    }
+    .field input:focus{outline:3px solid rgba(79,70,229,.12);border-color:var(--primary)}
+    .demo-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .demo-status{margin-top:13px;padding:11px 12px;border-radius:11px;background:#eef3ff;color:#41506f;font-size:14px}
+    .demo-status.ok{background:#ecfdf3;color:#166534}
+    .demo-status.error{background:#fff1f2;color:#9f1239}
+    .wire{
+      display:grid;align-content:center;gap:11px;text-align:center;color:var(--muted);
+      font-size:12px;font-weight:800
+    }
+    .wire-step{border:1px dashed #b7c3dc;border-radius:13px;background:#f8faff;padding:10px 6px}
+    .wire-arrow{font-size:28px;color:var(--primary)}
+    .log-title{font-size:12px;font-weight:850;color:#67748e;margin:12px 0 5px}
+    .code-log{
+      min-height:72px;margin:0;background:#15182d;color:#dce6ff;border-radius:12px;
+      padding:11px;overflow:auto;font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace
+    }
+    .mini-store{margin-top:12px;width:100%;border-collapse:collapse;font-size:12px;background:#fff}
+    .mini-store th,.mini-store td{padding:8px;border-bottom:1px solid var(--line);text-align:left}
+    .mini-store th{background:#f2f5fb}
+    .review-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px}
+    .verdict{
+      border-radius:22px;padding:25px;color:#fff;
+      background:linear-gradient(145deg,#29305c,#4f46e5);box-shadow:var(--shadow)
+    }
+    .verdict h3{font-size:25px;margin:0 0 10px}
+    .verdict p{margin:0;color:#e4e9ff}
+    .term-table{width:100%;border-collapse:collapse}
+    .term-table th,.term-table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left}
+    .term-table th{background:#f1f5fb;font-size:13px}
+    .term-table td:first-child{font-weight:800;color:#4f5c76}
+    .phase-band{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .phase{
+      border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff
+    }
+    .phase b{display:block;margin-bottom:5px}
+    .phase span{color:var(--muted);font-size:13px}
+    .ai-starter{
+      border:1px solid #c7d2fe;background:linear-gradient(145deg,#eef2ff,#fff);
+      border-radius:22px;padding:24px;margin-bottom:20px
+    }
+    .ai-starter h3{margin:0 0 8px;font-size:23px}
+    .dialogue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}
+    .dialogue-card{
+      background:#fff;border:1px solid var(--line);border-radius:20px;padding:21px;position:relative
+    }
+    .dialogue-card .round{
+      width:38px;height:38px;border-radius:12px;background:#eef0ff;color:#4338ca;
+      display:grid;place-items:center;font-weight:950;margin-bottom:12px
+    }
+    .dialogue-card h3{margin:0 0 7px;font-size:20px}
+    .dialogue-card p{margin:0 0 12px;color:var(--muted);font-size:14px}
+    .talk{
+      border-left:4px solid var(--accent);background:#f3faff;border-radius:10px;
+      padding:12px;font-size:13px;color:#384760;white-space:pre-wrap
+    }
+    .gate{
+      margin-top:12px;font-size:12px;font-weight:800;color:#166534;background:#ecfdf3;
+      padding:8px 10px;border-radius:10px
+    }
+    .library-helper{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px
+    }
+    .helper-card{
+      background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px
+    }
+    .helper-card b{display:block;margin-bottom:5px}
+    .helper-card span{font-size:13px;color:var(--muted)}
+    .library-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+    .filter-btn{
+      border:1px solid var(--line);background:#fff;color:#4f5c76;padding:8px 11px;
+      border-radius:999px;font-size:13px;font-weight:800;cursor:pointer
+    }
+    .filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .library-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .lib-card{
+      background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;
+      display:flex;flex-direction:column;min-height:240px
+    }
+    .lib-card[hidden]{display:none}
+    .lib-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .lib-card h3{margin:0;font-size:21px}
+    .difficulty{
+      padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;white-space:nowrap
+    }
+    .difficulty.easy{background:#dcfce7;color:#166534}
+    .difficulty.mid{background:#fef3c7;color:#92400e}
+    .difficulty.hard{background:#fee2e2;color:#991b1b}
+    .lib-card p{color:var(--muted);font-size:14px;margin:11px 0}
+    .lib-use{font-size:13px;background:#f7f9fd;border-radius:11px;padding:10px;margin-bottom:10px}
+    .lib-warning{font-size:12px;color:#8a4b13;margin-bottom:12px}
+    .lib-link{
+      margin-top:auto;text-decoration:none;font-weight:850;color:var(--primary);
+      display:inline-flex;align-items:center;gap:5px
+    }
+    .source-note{margin-top:16px;color:var(--muted);font-size:12px}
+    .simple-warning{
+      margin-bottom:20px;border:1px solid #bfdbfe;background:#eff6ff;color:#1e3a8a;
+      padding:16px;border-radius:16px
+    }
+    @media (max-width:920px){
+      .demo-grid,.review-grid{grid-template-columns:1fr}
+      .wire{grid-template-columns:1fr 42px 1fr;align-items:center}
+      .wire-arrow{transform:none}
+      .dialogue-grid{grid-template-columns:1fr}
+      .library-grid{grid-template-columns:repeat(2,1fr)}
+      .library-helper{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:620px){
+      .demo-head{display:block}
+      .simulation-badge{display:inline-flex;margin-top:10px}
+      .phase-band,.library-grid,.library-helper{grid-template-columns:1fr}
+      .wire{grid-template-columns:1fr}
+      .wire-arrow{transform:rotate(90deg)}
+    }
+
+    @media print{
+      .topbar,.hero-actions,.copy-btn,.progress-card{display:none!important}
+      body{background:#fff}
+      .step,.card,.template{box-shadow:none;break-inside:avoid}
+      section{padding:28px 0}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">VC</div>
+        <span>바이브코딩 개발 가이드</span>
+      </div>
+      <nav aria-label="주요 메뉴">
+        <a href="#concept">핵심 개념</a>
+        <a href="#live-demo">동작 예시</a>
+        <a href="#process">쉬운 7단계</a>
+        <a href="#ai-guide">AI 동행형</a>
+        <a href="#libraries">교육용 라이브러리</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">비전공 교사·초보 개발자용</span>
+          <h1>아이디어를<br><span class="gradient-text">작동하는 결과물</span>로</h1>
+          <p>
+            바이브코딩은 AI에게 코드를 많이 생성하게 하는 방법이 아니라,
+            문제를 구조화하고 단계별 산출물을 검증하며 개발을 통제하는 방법입니다.
+            이 페이지는 아이디어 기획부터 배포까지 풀스택 개발 흐름을 안내합니다.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#process">7단계 시작하기</a>
+            <a class="btn btn-secondary" href="#template">프로젝트 정의서 작성</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="개발 흐름 요약">
+          <div class="badge" style="background:rgba(255,255,255,.12);color:#fff">핵심 흐름</div>
+          <h2>한 번에 완성하려 하지 않습니다.</h2>
+          <p style="color:#cbd5ef;margin:0">작은 단위로 설계하고, 구현하고, 확인한 뒤 다음 단계로 넘어갑니다.</p>
+          <div class="flow-mini">
+            <div><b>1</b><span>문제와 사용자를 명확히 정의</span></div>
+            <div><b>2</b><span>최소 기능 제품(MVP)으로 범위 축소</span></div>
+            <div><b>3</b><span>화면과 데이터 구조를 분리해 설계</span></div>
+            <div><b>4</b><span>단계별 테스트 후 배포</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="concept">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>먼저 알아야 할 세 가지 개념</h2>
+          <p>프론트엔드와 백엔드의 역할을 구분하면 AI에게 무엇을 요청해야 하는지가 명확해집니다.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="concept-icon">🖥️</div>
+            <h3>프론트엔드</h3>
+            <p>사용자가 직접 보고 누르는 화면입니다. 버튼, 입력창, 표, 메뉴, 디자인, 화면 전환을 담당합니다.</p>
+            <div class="chips">
+              <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">UI·UX</span>
+            </div>
+          </article>
+          <article class="card">
+            <div class="concept-icon">⚙️</div>
+            <h3>백엔드</h3>
+            <p>화면 뒤에서 데이터를 저장·조회하고 권한과 업무 규칙을 처리하는 영역입니다.</p>
+            <div class="chips">
+              <span class="chip">서버</span><span class="chip">API</span><span class="chip">DB</span><span class="chip">인증</span>
+            </div>
+          </article>
+          <article class="card">
+            <div class="concept-icon">🔗</div>
+            <h3>풀스택</h3>
+            <p>프론트엔드와 백엔드를 연결하여 하나의 완성된 서비스로 만드는 전체 개발 범위입니다.</p>
+            <div class="chips">
+              <span class="chip">화면</span><span class="chip">데이터</span><span class="chip">테스트</span><span class="chip">배포</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="concept-flow">
+          <div class="concept-box">
+            <strong>사용자 화면</strong>
+            <p class="small">예: 연수 신청서에서 이름과 소속을 입력하고 등록 버튼을 누름</p>
+          </div>
+          <div class="arrow">⇄</div>
+          <div class="concept-box">
+            <strong>서버와 데이터</strong>
+            <p class="small">예: 입력값을 검사하고 신청 정보를 저장한 뒤 성공 여부를 응답함</p>
+          </div>
+        </div>
+
+        <div class="demo-shell" id="live-demo">
+          <div class="demo-head">
+            <div>
+              <h3>직접 눌러보는 프론트엔드–백엔드 동작 예시</h3>
+              <p>학생 활동 점수를 입력하면 화면이 요청을 보내고, 가상 서버가 검사·저장한 뒤 결과를 돌려줍니다.</p>
+            </div>
+            <span class="simulation-badge">학습용 가상 서버</span>
+          </div>
+
+          <div class="demo-grid">
+            <div class="demo-zone front">
+              <h4>① 프론트엔드: 사용자가 보는 부분</h4>
+              <p class="zone-desc">입력받기, 버튼 누르기, 결과 보여주기를 담당합니다.</p>
+              <div class="field">
+                <label for="demoStudent">학생 이름</label>
+                <input id="demoStudent" value="김학생" maxlength="20">
+              </div>
+              <div class="field">
+                <label for="demoScore">활동 점수(0~100)</label>
+                <input id="demoScore" type="number" value="85" min="0" max="100">
+              </div>
+              <label class="check-item" style="padding:4px 0 10px;border:0">
+                <input id="demoServerError" type="checkbox">
+                <span>서버 오류 상황도 체험하기</span>
+              </label>
+              <div class="demo-actions">
+                <button class="btn btn-primary" id="demoSend">서버에 저장 요청</button>
+                <button class="btn btn-secondary" id="demoClear">초기화</button>
+              </div>
+              <div class="demo-status" id="demoStatus">입력 후 저장 요청 버튼을 눌러보세요.</div>
+            </div>
+
+            <div class="wire" aria-label="데이터 이동 과정">
+              <div class="wire-step">요청 만들기<br><small>이름·점수</small></div>
+              <div class="wire-arrow">→</div>
+              <div class="wire-step">서버 응답<br><small>성공·오류</small></div>
+            </div>
+
+            <div class="demo-zone back">
+              <h4>② 백엔드: 화면 뒤에서 처리하는 부분</h4>
+              <p class="zone-desc">입력값 검사, 저장, 오류 처리, 응답 생성을 담당합니다.</p>
+              <div class="log-title">프론트엔드가 보낸 요청</div>
+              <pre class="code-log" id="requestLog">{ 아직 요청이 없습니다 }</pre>
+              <div class="log-title">백엔드가 돌려준 응답</div>
+              <pre class="code-log" id="responseLog">{ 아직 응답이 없습니다 }</pre>
+              <div class="log-title">가상 데이터 저장소</div>
+              <table class="mini-store">
+                <thead><tr><th>번호</th><th>학생</th><th>점수</th></tr></thead>
+                <tbody id="demoStore"><tr><td colspan="3">저장된 데이터 없음</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+          <p class="source-note">실제 웹앱에서는 이 과정이 API와 데이터베이스를 통해 이루어집니다. 이 예시는 브라우저 안에서 서버 동작을 흉내 낸 학습용 시뮬레이션입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>바이브코딩의 기본 원칙</h2>
+          <p>AI가 코드를 작성하더라도 문제 정의, 우선순위, 검증 책임은 개발자에게 있습니다.</p>
+        </div>
+        <div class="principles">
+          <div class="principle"><b>작게 시작</b><span>처음부터 모든 기능을 넣지 않고 핵심 기능 1~3개로 시작합니다.</span></div>
+          <div class="principle"><b>문서 먼저</b><span>코드보다 요구사항, 화면, 데이터, 예외 상황을 먼저 기록합니다.</span></div>
+          <div class="principle"><b>한 단계씩</b><span>여러 기능을 동시에 요청하지 않고 기능 단위로 구현·검증합니다.</span></div>
+          <div class="principle"><b>증거로 확인</b><span>“되는 것 같다”가 아니라 테스트 결과와 오류 로그로 판단합니다.</span></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="beginner-review">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>초보자에게 7단계가 적합할까?</h2>
+          <p>개발 구조로는 적합하지만, 수업에서는 전문 용어보다 사용자가 해야 할 행동을 먼저 제시하는 편이 좋습니다.</p>
+        </div>
+        <div class="review-grid">
+          <div class="verdict">
+            <h3>검토 결론</h3>
+            <p>
+              7단계는 빠뜨리기 쉬운 기획·검사·배포를 포함한다는 점에서 적절합니다.
+              다만 입문자는 모든 산출물을 처음부터 완벽히 작성하기보다,
+              첫 프로젝트에서는 각 단계마다 핵심 질문 1~2개와 결과물 1개만 완성하도록 단순화하는 것이 좋습니다.
+            </p>
+          </div>
+          <div class="card" style="padding:0;overflow:hidden">
+            <table class="term-table">
+              <thead><tr><th>개발 용어</th><th>초보자에게 먼저 보여줄 표현</th></tr></thead>
+              <tbody>
+                <tr><td>아이디어 기획</td><td>해결할 문제 고르기</td></tr>
+                <tr><td>MVP</td><td>가장 작은 첫 버전</td></tr>
+                <tr><td>기능 정의</td><td>화면에서 무엇이 어떻게 움직일지 적기</td></tr>
+                <tr><td>프론트엔드</td><td>눈에 보이는 화면 만들기</td></tr>
+                <tr><td>백엔드·API·DB</td><td>저장하고 다시 불러오는 기능 연결하기</td></tr>
+                <tr><td>QA</td><td>일부러 여러 상황에서 시험해 보기</td></tr>
+                <tr><td>배포</td><td>다른 사람이 인터넷에서 쓰게 공유하기</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="phase-band">
+          <div class="phase"><b>생각하기</b><span>1~3단계: 문제, 작은 범위, 화면과 동작을 정합니다.</span></div>
+          <div class="phase"><b>만들기</b><span>4~5단계: 화면을 만들고 저장 기능을 연결합니다.</span></div>
+          <div class="phase"><b>확인하고 공유하기</b><span>6~7단계: 실제처럼 시험하고 다른 사람에게 공개합니다.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>처음 만드는 사람을 위한 쉬운 7단계</h2>
+          <p>쉬운 행동 표현을 먼저 사용하고, 실제 개발 용어는 옆에 함께 표시했습니다.</p>
+        </div>
+
+        <div class="process-layout">
+          <aside class="side-nav">
+            <a href="#step1"><span class="num">1</span>문제 고르기</a>
+            <a href="#step2"><span class="num">2</span>작은 버전 정하기</a>
+            <a href="#step3"><span class="num">3</span>화면·동작 적기</a>
+            <a href="#step4"><span class="num">4</span>화면 만들기</a>
+            <a href="#step5"><span class="num">5</span>저장 기능 연결</a>
+            <a href="#step6"><span class="num">6</span>실제처럼 시험</a>
+            <a href="#step7"><span class="num">7</span>공유하고 관리</a>
+          </aside>
+
+          <div class="steps">
+            <article class="step" id="step1">
+              <div class="step-top">
+                <div class="step-num">01</div>
+                <div class="step-title">
+                  <h3>해결할 문제 고르기 <span class="term-note">아이디어 기획</span></h3>
+                  <p>“무엇을 만들까?”보다 “누구의 어떤 문제를 해결할까?”를 먼저 결정합니다.</p>
+                </div>
+              </div>
+              <div class="step-grid">
+                <div class="panel">
+                  <h4>핵심 질문</h4>
+                  <ul>
+                    <li>누가 사용하는가?</li>
+                    <li>현재 어떤 불편이 있는가?</li>
+                    <li>결과물이 어떤 행동을 줄이거나 쉽게 만드는가?</li>
+                    <li>성공 여부를 무엇으로 판단할 것인가?</li>
+                  </ul>
+                </div>
+                <div class="panel deliverable">
+                  <h4>필수 산출물</h4>
+                  <ul>
+                    <li>문제 정의문 1문장</li>
+                    <li>핵심 사용자 1~2명</li>
+                    <li>현재 업무 흐름과 개선 후 흐름</li>
+                    <li>성공 기준 2~3개</li>
+                  </ul>
+                </div>
+                <div class="panel">
+                  <h4>교사 업무 예시</h4>
+                  <ul>
+                    <li>연수 대상자가 신청 정보를 스스로 확인·수정하도록 한다.</li>
+                    <li>담당자는 반복 문의와 수기 수정 시간을 줄인다.</li>
+                  </ul>
+                </div>
+                <div class="panel mistake">
+                  <h4>자주 발생하는 실수</h4>
+                  <ul>
+                    <li>“좋아 보이는 기능”부터 추가함</li>
+                    <li>사용자를 너무 넓게 설정함</li>
+                    <li>문제보다 기술이나 도구를 먼저 선택함</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt"><button class="copy-btn">복사</button><span class="prompt-label">AI 요청 예시</span>나는 [사용자]가 [현재 상황]에서 겪는 [문제]를 해결하는 도구를 만들고 싶다.
+사용자가 실제로 수행하는 업무 흐름을 5단계 이내로 정리하고,
+가장 큰 불편 3개와 디지털 도구로 개선 가능한 지점을 제안해줘.
+아직 기능이나 기술 스택은 결정하지 말고 문제 정의에 집중해줘.</div>
+              <div class="done">✓ 완료 기준: 사용자, 문제, 기대 변화가 한 문장으로 설명된다.</div>
+            </article>
+
+            <article class="step" id="step2">
+              <div class="step-top">
+                <div class="step-num">02</div>
+                <div class="step-title">
+                  <h3>가장 작은 첫 버전 정하기 <span class="term-note">아이디어 구체화·MVP</span></h3>
+                  <p>사용 장면과 업무 흐름을 시나리오로 바꾸고, MVP 범위를 결정합니다.</p>
+                </div>
+              </div>
+              <div class="step-grid">
+                <div class="panel">
+                  <h4>핵심 질문</h4>
+                  <ul>
+                    <li>사용자는 처음에 무엇을 보고 시작하는가?</li>
+                    <li>어떤 정보를 입력하고 어떤 결과를 받는가?</li>
+                    <li>반드시 필요한 기능과 나중에 추가할 기능은 무엇인가?</li>
+                    <li>사용 중 실패할 수 있는 상황은 무엇인가?</li>
+                  </ul>
+                </div>
+                <div class="panel deliverable">
+                  <h4>필수 산출물</h4>
+                  <ul>
+                    <li>대표 사용자 시나리오</li>
+                    <li>MVP 기능 목록</li>
+                    <li>제외 기능 목록</li>
+                    <li>화면 흐름도</li>
+                  </ul>
+                </div>
+                <div class="panel">
+                  <h4>MVP 판단 기준</h4>
+                  <ul>
+                    <li>문제를 해결하는 최소 기능인가?</li>
+                    <li>없어도 첫 버전을 사용할 수 있는가?</li>
+                    <li>개인정보나 권한 위험이 과도하지 않은가?</li>
+                  </ul>
+                </div>
+                <div class="panel mistake">
+                  <h4>자주 발생하는 실수</h4>
+                  <ul>
+                    <li>로그인, 알림, 통계, 관리자 기능을 모두 넣음</li>
+                    <li>예외 상황 없이 정상 흐름만 생각함</li>
+                    <li>사용자가 실제로 누르는 순서를 정의하지 않음</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt"><button class="copy-btn">복사</button><span class="prompt-label">AI 요청 예시</span>아래 문제 정의를 바탕으로 MVP를 설계해줘.
+[문제 정의 붙여넣기]
+
+1. 대표 사용자 시나리오
+2. 반드시 필요한 기능
+3. 첫 버전에서 제외할 기능
+4. 화면 이동 흐름
+5. 실패·예외 상황
+을 표로 정리해줘. 기능은 최대 5개로 제한해줘.</div>
+              <div class="done">✓ 완료 기준: 첫 버전에 넣을 것과 넣지 않을 것이 구분된다.</div>
+            </article>
+
+            <article class="step" id="step3">
+              <div class="step-top">
+                <div class="step-num">03</div>
+                <div class="step-title">
+                  <h3>화면과 동작 적기 <span class="term-note">기능 정의</span></h3>
+                  <p>AI가 추측하지 않도록 기능의 입력, 처리, 출력, 예외, 권한을 명세합니다.</p>
+                </div>
+              </div>
+              <div class="step-grid">
+                <div class="panel">
+                  <h4>기능 명세의 5요소</h4>
+                  <ul>
+                    <li><strong>입력:</strong> 사용자가 넣는 값</li>
+                    <li><strong>처리:</strong> 시스템이 수행할 규칙</li>
+                    <li><strong>출력:</strong> 화면에 보여줄 결과</li>
+                    <li><strong>예외:</strong> 오류·중복·빈값 처리</li>
+                    <li><strong>권한:</strong> 누가 조회·수정 가능한가</li>
+                  </ul>
+                </div>
+                <div class="panel deliverable">
+                  <h4>필수 산출물</h4>
+                  <ul>
+                    <li>기능 명세서</li>
+                    <li>화면 목록과 화면별 구성요소</li>
+                    <li>데이터 항목 및 자료형</li>
+                    <li>검증 규칙과 오류 메시지</li>
+                  </ul>
+                </div>
+                <div class="panel">
+                  <h4>데이터 항목 예시</h4>
+                  <ul>
+                    <li>이름: 문자열, 필수, 2~20자</li>
+                    <li>이메일: 문자열, 이메일 형식 검사</li>
+                    <li>신청일시: 날짜·시간, 자동 기록</li>
+                    <li>수정요청: 문자열, 최대 500자</li>
+                  </ul>
+                </div>
+                <div class="panel mistake">
+                  <h4>자주 발생하는 실수</h4>
+                  <ul>
+                    <li>“적당히”, “깔끔하게”처럼 기준이 없는 표현 사용</li>
+                    <li>데이터 형식과 중복 기준을 생략함</li>
+                    <li>관리자와 일반 사용자 권한을 구분하지 않음</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt"><button class="copy-btn">복사</button><span class="prompt-label">AI 요청 예시</span>다음 MVP 기능을 개발 가능한 기능 명세서로 바꿔줘.
+[기능 목록 붙여넣기]
+
+각 기능마다 다음 항목을 작성해줘.
+- 기능명
+- 사용자 목적
+- 입력값과 검증 규칙
+- 처리 절차
+- 출력 결과
+- 오류·예외 상황
+- 사용자 권한
+- 완료 조건
+모호한 부분은 임의로 결정하지 말고 '결정 필요'로 표시해줘.</div>
+              <div class="done">✓ 완료 기준: 다른 사람이 명세만 읽고 같은 기능을 구현할 수 있다.</div>
+            </article>
+
+            <article class="step" id="step4">
+              <div class="step-top">
+                <div class="step-num">04</div>
+                <div class="step-title">
+                  <h3>눈에 보이는 화면 만들기 <span class="term-note">프론트엔드 개발</span></h3>
+                  <p>데이터 연결 전에 화면 구조와 사용자 동작을 먼저 확인합니다.</p>
+                </div>
+              </div>
+              <div class="step-grid">
+                <div class="panel">
+                  <h4>권장 개발 순서</h4>
+                  <ul>
+                    <li>화면 구조와 메뉴</li>
+                    <li>입력창, 버튼, 표 등 UI 요소</li>
+                    <li>반응형 화면</li>
+                    <li>가짜 데이터로 화면 동작 구현</li>
+                    <li>빈 화면·오류·로딩 상태 구현</li>
+                  </ul>
+                </div>
+                <div class="panel deliverable">
+                  <h4>필수 산출물</h4>
+                  <ul>
+                    <li>화면별 HTML/CSS/JS</li>
+                    <li>사용자 동선 확인 가능한 프로토타입</li>
+                    <li>입력값 기본 검증</li>
+                    <li>로딩·성공·오류 메시지</li>
+                  </ul>
+                </div>
+                <div class="panel">
+                  <h4>검토 관점</h4>
+                  <ul>
+                    <li>사용자가 다음 행동을 바로 알 수 있는가?</li>
+                    <li>중요한 버튼이 눈에 띄는가?</li>
+                    <li>모바일에서도 입력하기 쉬운가?</li>
+                    <li>오류가 발생한 이유를 이해할 수 있는가?</li>
+                  </ul>
+                </div>
+                <div class="panel mistake">
+                  <h4>자주 발생하는 실수</h4>
+                  <ul>
+                    <li>디자인과 실제 기능 연결을 동시에 요청함</li>
+                    <li>가짜 데이터 없이 바로 서버 연결을 시도함</li>
+                    <li>성공 화면만 만들고 로딩·오류 상태를 빼먹음</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt"><button class="copy-btn">복사</button><span class="prompt-label">AI 요청 예시</span>다음 기능 명세를 바탕으로 프론트엔드 프로토타입을 만들어줘.
+[기능 명세 붙여넣기]
+
+조건:
+- 아직 실제 DB나 API에는 연결하지 않는다.
+- 샘플 데이터로 모든 화면 흐름을 확인할 수 있게 한다.
+- 로딩, 데이터 없음, 입력 오류, 성공 상태를 각각 구현한다.
+- 반응형으로 작성한다.
+- 파일 구조와 각 파일의 역할을 먼저 제시한 뒤 코드를 작성한다.</div>
+              <div class="done">✓ 완료 기준: 실제 데이터 없이도 사용 흐름 전체를 시연할 수 있다.</div>
+            </article>
+
+            <article class="step" id="step5">
+              <div class="step-top">
+                <div class="step-num">05</div>
+                <div class="step-title">
+                  <h3>저장하고 불러오기 연결하기 <span class="term-note">백엔드·API·DB</span></h3>
+                  <p>저장·조회·수정 규칙과 권한을 구현하고 프론트엔드와 API로 연결합니다.</p>
+                </div>
+              </div>
+              <div class="step-grid">
+                <div class="panel">
+                  <h4>백엔드 핵심 구성</h4>
+                  <ul>
+                    <li>데이터베이스 또는 스프레드시트</li>
+                    <li>데이터 조회·등록·수정·삭제 기능</li>
+                    <li>입력값 검증</li>
+                    <li>로그인과 권한</li>
+                    <li>오류 기록과 응답</li>
+                  </ul>
+                </div>
+                <div class="panel deliverable">
+                  <h4>필수 산출물</h4>
+                  <ul>
+                    <li>데이터 구조표</li>
+                    <li>API 목록</li>
+                    <li>권한 정책</li>
+                    <li>프론트엔드 연결 코드</li>
+                    <li>오류 처리 규칙</li>
+                  </ul>
+                </div>
+                <div class="panel">
+                  <h4>API 예시</h4>
+                  <ul>
+                    <li>GET /applications — 신청 목록 조회</li>
+                    <li>POST /applications — 신청 등록</li>
+                    <li>PATCH /applications/:id — 신청 수정</li>
+                    <li>DELETE /applications/:id — 신청 삭제</li>
+                  </ul>
+                </div>
+                <div class="panel mistake">
+                  <h4>자주 발생하는 실수</h4>
+                  <ul>
+                    <li>화면에서만 입력값을 검사함</li>
+                    <li>누구나 전체 데이터를 볼 수 있게 함</li>
+                    <li>중복 등록과 동시 수정 상황을 고려하지 않음</li>
+                    <li>비밀번호나 API 키를 코드에 직접 작성함</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt"><button class="copy-btn">복사</button><span class="prompt-label">AI 요청 예시</span>다음 프론트엔드와 기능 명세를 백엔드에 연결하려고 한다.
+[기능 명세와 현재 파일 구조 붙여넣기]
+
+1. 필요한 데이터 구조
+2. API 목록과 요청·응답 형식
+3. 서버 측 입력 검증
+4. 사용자 권한
+5. 오류 처리
+6. 환경변수로 분리할 비밀정보
+를 먼저 설계해줘.
+설계 검토가 끝난 뒤 기능을 한 개씩 구현하고, 매 단계 테스트 방법을 함께 제시해줘.</div>
+              <div class="done">✓ 완료 기준: 새로고침 후에도 데이터가 유지되고 권한에 따라 기능이 제한된다.</div>
+            </article>
+
+            <article class="step" id="step6">
+              <div class="step-top">
+                <div class="step-num">06</div>
+                <div class="step-title">
+                  <h3>실제처럼 여러 상황에서 시험하기 <span class="term-note">QA</span></h3>
+                  <p>정상 동작뿐 아니라 잘못된 입력, 권한, 중복, 새로고침, 모바일 환경을 검증합니다.</p>
+                </div>
+              </div>
+              <div class="step-grid">
+                <div class="panel">
+                  <h4>테스트 범주</h4>
+                  <ul>
+                    <li>정상 시나리오</li>
+                    <li>빈값·잘못된 형식</li>
+                    <li>중복 데이터</li>
+                    <li>권한 없는 접근</li>
+                    <li>네트워크 오류</li>
+                    <li>모바일·브라우저 차이</li>
+                  </ul>
+                </div>
+                <div class="panel deliverable">
+                  <h4>필수 산출물</h4>
+                  <ul>
+                    <li>테스트 케이스</li>
+                    <li>오류 재현 절차</li>
+                    <li>수정 전·후 결과</li>
+                    <li>배포 전 점검표</li>
+                  </ul>
+                </div>
+                <div class="panel">
+                  <h4>오류 보고 형식</h4>
+                  <ul>
+                    <li>발생 화면과 기능</li>
+                    <li>재현 순서</li>
+                    <li>기대한 결과</li>
+                    <li>실제 결과</li>
+                    <li>콘솔·서버 오류 메시지</li>
+                  </ul>
+                </div>
+                <div class="panel mistake">
+                  <h4>자주 발생하는 실수</h4>
+                  <ul>
+                    <li>“안 돼요”만 전달하고 재현 절차를 주지 않음</li>
+                    <li>오류 수정 중 다른 기능이 깨졌는지 확인하지 않음</li>
+                    <li>실제 개인정보로 테스트함</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt"><button class="copy-btn">복사</button><span class="prompt-label">AI 요청 예시</span>다음 기능 명세를 기준으로 테스트 케이스를 작성해줘.
+[기능 명세 붙여넣기]
+
+정상, 경계값, 빈값, 잘못된 형식, 중복, 권한, 네트워크 오류,
+모바일 화면, 새로고침 상황을 포함해 표로 작성해줘.
+각 항목에 테스트 절차, 입력값, 예상 결과, 실제 결과 기록 칸을 넣어줘.</div>
+              <div class="done">✓ 완료 기준: 핵심 기능마다 성공·실패 테스트가 있고 모두 결과를 기록했다.</div>
+            </article>
+
+            <article class="step" id="step7">
+              <div class="step-top">
+                <div class="step-num">07</div>
+                <div class="step-title">
+                  <h3>다른 사람이 쓰게 공유하고 관리하기 <span class="term-note">배포·운영</span></h3>
+                  <p>실제 사용자가 접근할 수 있도록 공개하고, 장애와 변경에 대비합니다.</p>
+                </div>
+              </div>
+              <div class="step-grid">
+                <div class="panel">
+                  <h4>배포 전 확인</h4>
+                  <ul>
+                    <li>개발용 샘플 데이터 제거</li>
+                    <li>API 키와 비밀번호 환경변수 분리</li>
+                    <li>관리자 권한 재확인</li>
+                    <li>개인정보 수집 항목 최소화</li>
+                    <li>백업과 복구 방법 확인</li>
+                  </ul>
+                </div>
+                <div class="panel deliverable">
+                  <h4>필수 산출물</h4>
+                  <ul>
+                    <li>배포 주소</li>
+                    <li>사용자 안내서</li>
+                    <li>관리자 운영서</li>
+                    <li>업데이트 기록</li>
+                    <li>장애 대응 절차</li>
+                  </ul>
+                </div>
+                <div class="panel">
+                  <h4>배포 방식 선택</h4>
+                  <ul>
+                    <li>정적 화면만 있음: 정적 웹 호스팅</li>
+                    <li>서버·DB가 있음: 웹 애플리케이션 호스팅</li>
+                    <li>Google Workspace 중심: Apps Script 웹앱</li>
+                    <li>내부 시험용: 로컬 또는 제한된 테스트 환경</li>
+                  </ul>
+                </div>
+                <div class="panel mistake">
+                  <h4>자주 발생하는 실수</h4>
+                  <ul>
+                    <li>테스트 주소와 운영 주소를 구분하지 않음</li>
+                    <li>수정 전 백업이나 버전 기록을 남기지 않음</li>
+                    <li>오류가 발생했을 때 이전 버전으로 되돌릴 방법이 없음</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt"><button class="copy-btn">복사</button><span class="prompt-label">AI 요청 예시</span>현재 프로젝트를 실제 사용자에게 배포하려고 한다.
+[기술 구성과 파일 구조 붙여넣기]
+
+배포 전 점검표를 작성하고,
+- 비밀정보 관리
+- 권한
+- 개인정보
+- 백업
+- 오류 로그
+- 롤백
+- 사용자 안내
+관점에서 위험을 검토해줘.
+그다음 이 프로젝트에 적합한 배포 절차를 단계별로 안내해줘.</div>
+              <div class="done">✓ 완료 기준: 다른 사용자가 배포 주소에서 핵심 기능을 수행하고, 문제 발생 시 복구 절차가 있다.</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="ai-guide">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>7단계가 어렵다면: AI와 대화하며 만드는 방법</h2>
+          <p>AI에게 전체 앱을 한 번에 만들어 달라고 하지 않고, 질문을 받으며 한 단계씩 결정하는 방식입니다.</p>
+        </div>
+
+        <div class="ai-starter">
+          <h3>처음에 AI에게 보내는 안내문</h3>
+          <p style="color:var(--muted)">아래 문장을 먼저 보내면 AI가 개발을 서두르지 않고 필요한 내용을 차례로 질문하도록 만들 수 있습니다.</p>
+          <div class="prompt" style="margin-top:13px"><button class="copy-btn">복사</button><span class="prompt-label">AI 동행형 시작 프롬프트</span>나는 웹앱 개발 경험이 거의 없는 교사야.
+내가 수업 또는 학교 업무에 사용할 도구를 만들 수 있도록 개발 안내자 역할을 해줘.
+
+규칙:
+1. 한 번에 질문은 하나만 해줘.
+2. 전문 용어를 사용하면 바로 쉬운 말로 설명해줘.
+3. 내가 답하면 지금까지 결정된 내용을 짧게 정리해줘.
+4. 화면과 기능이 충분히 정리되기 전에는 코드를 작성하지 마.
+5. 첫 버전은 핵심 기능 1~3개만 포함해줘.
+6. 코드는 기능 하나씩 만들고, 매번 내가 시험할 방법을 알려줘.
+7. 기존에 정상 작동하는 기능을 임의로 삭제하거나 바꾸지 마.
+8. 개인정보·로그인·외부 API가 필요하면 위험과 대안을 먼저 설명해줘.
+
+첫 질문은 “누가 어떤 상황에서 사용할 도구인가요?”로 시작해줘.</div>
+        </div>
+
+        <div class="dialogue-grid">
+          <article class="dialogue-card">
+            <div class="round">1</div>
+            <h3>필요한 도구 설명하기</h3>
+            <p>대상을 정하고 현재 불편한 일을 실제 상황처럼 말합니다.</p>
+            <div class="talk">“고등학교 수업에서 학생들이 모둠별 의견을 제출하고, 교사가 한 화면에서 정리해 보는 도구가 필요해.”</div>
+            <div class="gate">다음 단계 조건: 사용자와 해결할 문제가 한 문장으로 정리됨</div>
+          </article>
+
+          <article class="dialogue-card">
+            <div class="round">2</div>
+            <h3>가장 작은 첫 버전 고르기</h3>
+            <p>AI에게 꼭 필요한 기능과 나중에 넣을 기능을 나누게 합니다.</p>
+            <div class="talk">“첫 수업에서 실제로 사용할 수 있는 가장 작은 버전으로 줄여줘. 꼭 필요한 기능은 3개 이하로 제한하고, 나중에 추가할 기능을 따로 적어줘.”</div>
+            <div class="gate">다음 단계 조건: 이번에 만들 기능이 1~3개로 제한됨</div>
+          </article>
+
+          <article class="dialogue-card">
+            <div class="round">3</div>
+            <h3>화면을 글과 그림으로 확인하기</h3>
+            <p>코드 전에 화면 목록과 버튼을 누르는 순서를 검토합니다.</p>
+            <div class="talk">“화면마다 제목, 입력칸, 버튼, 결과 영역을 표로 보여줘. 사용자가 처음 접속한 뒤 완료할 때까지 누르는 순서도 함께 작성해줘.”</div>
+            <div class="gate">다음 단계 조건: 화면 흐름을 읽고 수정할 부분이 없음</div>
+          </article>
+
+          <article class="dialogue-card">
+            <div class="round">4</div>
+            <h3>화면 샘플부터 만들기</h3>
+            <p>아직 저장 기능 없이 가짜 데이터로 화면과 버튼 동작을 확인합니다.</p>
+            <div class="talk">“지금은 서버나 데이터베이스를 연결하지 말고, 하나의 HTML 파일에서 실행되는 화면 샘플을 만들어줘. 가짜 데이터로 모든 버튼을 시험할 수 있게 해줘.”</div>
+            <div class="gate">다음 단계 조건: 화면에서 사용 흐름 전체를 시연할 수 있음</div>
+          </article>
+
+          <article class="dialogue-card">
+            <div class="round">5</div>
+            <h3>저장 기능 하나만 연결하기</h3>
+            <p>저장 위치의 장단점을 들은 뒤 한 가지를 선택합니다.</p>
+            <div class="talk">“이 도구에 적합한 저장 방법을 브라우저 저장, Google Sheets, 일반 데이터베이스로 나눠 쉽게 비교해줘. 내가 선택하면 저장 기능 하나만 연결하고 시험 방법을 알려줘.”</div>
+            <div class="gate">다음 단계 조건: 새로고침 후 데이터 유지 여부를 확인함</div>
+          </article>
+
+          <article class="dialogue-card">
+            <div class="round">6</div>
+            <h3>오류를 찾아 고치고 공유하기</h3>
+            <p>AI에게 테스트 표를 만들게 하고 직접 결과를 기록한 뒤 배포합니다.</p>
+            <div class="talk">“정상 입력, 빈칸, 잘못된 입력, 중복 제출, 모바일 화면을 시험하는 표를 만들어줘. 오류를 전달하면 원인을 추측하기 전에 재현 절차와 오류 메시지를 먼저 확인해줘.”</div>
+            <div class="gate">완료 조건: 핵심 테스트 통과, 배포 주소와 복구 방법 확보</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="libraries">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>수업용 웹앱 개발에 유용한 JavaScript 라이브러리</h2>
+          <p>라이브러리는 특정 기능을 이미 만들어 둔 코드 묶음입니다. 목적에 맞는 것만 최소한으로 선택해야 합니다.</p>
+        </div>
+
+        <div class="simple-warning">
+          <strong>먼저 확인:</strong> 단순 퀴즈, 계산기, 입력 폼, 타이머는 HTML·CSS·JavaScript만으로 충분할 수 있습니다.
+          라이브러리를 추가하면 기능은 빨리 만들 수 있지만 파일 크기, 학습 난이도, 오류 원인도 함께 늘어납니다.
+        </div>
+
+        <div class="library-helper">
+          <div class="helper-card"><b>표·그래프</b><span>처음에는 Chart.js, 매우 자유로운 시각화는 D3</span></div>
+          <div class="helper-card"><b>움직이는 수업 자료</b><span>간단한 상호작용은 p5.js, 3D는 three.js</span></div>
+          <div class="helper-card"><b>게임·시뮬레이션</b><span>물리 현상은 Matter.js, 2D 게임은 Phaser</span></div>
+          <div class="helper-card"><b>AI 체험</b><span>입문 수업은 ml5.js, 세밀한 모델 제어는 TensorFlow.js</span></div>
+        </div>
+
+        <div class="library-toolbar" aria-label="라이브러리 필터">
+          <button class="filter-btn active" data-filter="all">전체</button>
+          <button class="filter-btn" data-filter="easy">초보 추천</button>
+          <button class="filter-btn" data-filter="visual">시각화</button>
+          <button class="filter-btn" data-filter="simulation">시뮬레이션·게임</button>
+          <button class="filter-btn" data-filter="ai">인공지능</button>
+          <button class="filter-btn" data-filter="subject">교과 도구</button>
+        </div>
+
+        <div class="library-grid" id="libraryGrid">
+          <article class="lib-card" data-tags="easy visual subject">
+            <div class="lib-top"><h3>Chart.js</h3><span class="difficulty easy">쉬움</span></div>
+            <p>막대, 선, 원형 그래프 등 기본 데이터 차트를 비교적 짧은 코드로 만듭니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 설문 결과, 실험값 변화, 성적 분포, 실시간 투표 결과</div>
+            <div class="lib-warning">복잡한 사용자 정의 시각화에는 한계가 있습니다.</div>
+            <a class="lib-link" href="https://www.chartjs.org/docs/latest/" target="_blank" rel="noopener">공식 문서 보기 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="hard visual subject">
+            <div class="lib-top"><h3>D3</h3><span class="difficulty hard">어려움</span></div>
+            <p>데이터를 화면 요소와 직접 연결해 매우 자유로운 동적 시각화를 만들 수 있습니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 네트워크 그래프, 계층 구조, 지도 기반 통계, 탐색형 데이터 자료</div>
+            <div class="lib-warning">단순 차트에는 과도할 수 있어 초보자의 첫 선택으로는 권하지 않습니다.</div>
+            <a class="lib-link" href="https://d3js.org/" target="_blank" rel="noopener">공식 문서 보기 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="easy visual simulation subject">
+            <div class="lib-top"><h3>p5.js</h3><span class="difficulty easy">쉬움</span></div>
+            <p>캔버스에 그림, 애니메이션, 마우스·키보드 상호작용을 구현하는 창작 코딩 도구입니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 함수 그래프 놀이, 입자 움직임, 미디어 아트, 센서 데이터 표현</div>
+            <div class="lib-warning">업무용 입력 폼보다는 시각적·상호작용형 자료에 더 적합합니다.</div>
+            <a class="lib-link" href="https://p5js.org/ko/reference/" target="_blank" rel="noopener">한국어 공식 레퍼런스 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="mid visual simulation subject">
+            <div class="lib-top"><h3>three.js</h3><span class="difficulty mid">보통</span></div>
+            <p>웹브라우저에서 3D 장면, 카메라, 조명, 물체를 구성하는 라이브러리입니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 입체도형 회전, 태양계, 분자 구조, 가상 전시, 공간 좌표</div>
+            <div class="lib-warning">3D 좌표계·카메라·조명 개념이 필요해 첫 프로젝트보다는 두 번째 이후가 적합합니다.</div>
+            <a class="lib-link" href="https://threejs.org/manual/en/fundamentals.html" target="_blank" rel="noopener">공식 기초 문서 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="mid simulation subject">
+            <div class="lib-top"><h3>Matter.js</h3><span class="difficulty mid">보통</span></div>
+            <p>중력, 충돌, 마찰, 탄성 등을 표현하는 웹용 2D 물리 엔진입니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 낙하 운동, 충돌 실험, 힘과 운동, 물리 퍼즐</div>
+            <div class="lib-warning">정확한 과학 계산 도구가 아니라 시각적 시뮬레이션이므로 모델의 가정을 밝혀야 합니다.</div>
+            <a class="lib-link" href="https://brm.io/matter-js/docs/" target="_blank" rel="noopener">공식 API 문서 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="mid simulation subject">
+            <div class="lib-top"><h3>Phaser</h3><span class="difficulty mid">보통</span></div>
+            <p>장면, 캐릭터, 입력, 애니메이션, 물리 기능을 제공하는 웹용 2D 게임 프레임워크입니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 역사 전략 게임, 어휘 게임, 코딩 미션, 학습형 탈출 게임</div>
+            <div class="lib-warning">단순 퀴즈에 사용하면 구조가 과도하게 복잡해질 수 있습니다.</div>
+            <a class="lib-link" href="https://docs.phaser.io/" target="_blank" rel="noopener">공식 문서 보기 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="easy visual subject">
+            <div class="lib-top"><h3>Leaflet</h3><span class="difficulty easy">쉬움</span></div>
+            <p>모바일에서도 작동하는 상호작용형 지도를 웹페이지에 넣는 라이브러리입니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 지역 조사, 역사 유적 지도, 생태 관찰 위치, 공공데이터 지도</div>
+            <div class="lib-warning">지도 타일과 위치 데이터의 이용 조건 및 개인정보를 확인해야 합니다.</div>
+            <a class="lib-link" href="https://leafletjs.com/" target="_blank" rel="noopener">공식 문서 보기 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="easy visual subject">
+            <div class="lib-top"><h3>Mermaid</h3><span class="difficulty easy">쉬움</span></div>
+            <p>간단한 텍스트 문법으로 순서도, 시퀀스 다이어그램, 구조도를 생성합니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 알고리즘 순서도, 인물 관계, 업무 흐름, 시스템 구조</div>
+            <div class="lib-warning">세밀한 도형 배치보다 내용이 자주 바뀌는 구조도에 적합합니다.</div>
+            <a class="lib-link" href="https://mermaid.js.org/" target="_blank" rel="noopener">공식 문서 보기 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="easy subject">
+            <div class="lib-top"><h3>KaTeX</h3><span class="difficulty easy">쉬움</span></div>
+            <p>웹페이지에서 LaTeX 방식의 수학식을 빠르게 표시합니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 수학 문제, 과학 공식, 풀이 과정, 자동 문항 생성 결과</div>
+            <div class="lib-warning">수식 계산 기능이 아니라 수식을 보기 좋게 표현하는 도구입니다.</div>
+            <a class="lib-link" href="https://katex.org/docs/browser.html" target="_blank" rel="noopener">공식 사용 문서 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="mid simulation subject">
+            <div class="lib-top"><h3>Tone.js</h3><span class="difficulty mid">보통</span></div>
+            <p>브라우저에서 음원 재생, 신시사이저, 효과, 시간 제어를 구현합니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 리듬 학습, 주파수 비교, 가상 악기, 소리 합성</div>
+            <div class="lib-warning">브라우저 정책상 사용자의 클릭 뒤에 오디오가 시작되도록 설계해야 합니다.</div>
+            <a class="lib-link" href="https://tonejs.github.io/" target="_blank" rel="noopener">공식 문서·예시 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="easy ai visual subject">
+            <div class="lib-top"><h3>ml5.js</h3><span class="difficulty easy">쉬움</span></div>
+            <p>TensorFlow.js 기반의 모델을 학생과 창작 코더가 접근하기 쉽게 제공하는 웹 AI 라이브러리입니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 자세·손·얼굴 인식, 이미지 분류, 소리 분류, AI 상호작용 작품</div>
+            <div class="lib-warning">버전 변경 시 함수가 달라질 수 있으므로 AI가 만든 코드와 공식 문서 버전을 확인해야 합니다.</div>
+            <a class="lib-link" href="https://ml5js.org/" target="_blank" rel="noopener">공식 문서 보기 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="hard ai subject">
+            <div class="lib-top"><h3>TensorFlow.js</h3><span class="difficulty hard">어려움</span></div>
+            <p>브라우저와 Node.js에서 머신러닝 모델을 실행하거나 학습할 수 있는 라이브러리입니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 사전 학습 모델 활용, 간단한 모델 학습, AI 원리 탐구</div>
+            <div class="lib-warning">텐서, 모델 입출력, 성능과 메모리 개념이 필요해 심화 프로젝트에 적합합니다.</div>
+            <a class="lib-link" href="https://www.tensorflow.org/js" target="_blank" rel="noopener">공식 문서 보기 →</a>
+          </article>
+
+          <article class="lib-card" data-tags="mid subject">
+            <div class="lib-top"><h3>Blockly</h3><span class="difficulty mid">보통</span></div>
+            <p>드래그 앤 드롭 블록으로 프로그램을 구성하는 편집기를 웹앱에 넣을 수 있습니다.</p>
+            <div class="lib-use"><strong>수업 예시:</strong> 블록 코딩 도구, 알고리즘 조립, 맞춤형 프로그래밍 학습 환경</div>
+            <div class="lib-warning">블록 정의와 코드 생성 규칙을 직접 설계해야 하므로 기존 블록 코딩 도구 사용보다 개발 난이도가 높습니다.</div>
+            <a class="lib-link" href="https://developers.google.com/blockly" target="_blank" rel="noopener">공식 개발 문서 →</a>
+          </article>
+        </div>
+        <p class="source-note">라이브러리 설명과 공식 링크는 2026년 7월 21일 각 프로젝트의 공식 문서를 기준으로 확인했습니다.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>QA 기본 테스트 예시</h2>
+          <p>기능이 많지 않더라도 아래 항목은 최소한 확인해야 합니다.</p>
+        </div>
+        <div style="overflow:auto;border:1px solid var(--line);border-radius:18px">
+          <table class="qa-table">
+            <thead>
+              <tr><th>구분</th><th>테스트 예시</th><th>기대 결과</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>정상 입력</td><td>모든 필수 항목을 올바르게 입력</td><td>데이터 저장 후 성공 메시지 표시</td></tr>
+              <tr><td>빈값</td><td>필수 입력란을 비우고 제출</td><td>저장하지 않고 해당 항목에 안내 표시</td></tr>
+              <tr><td>형식 오류</td><td>이메일 칸에 일반 문장 입력</td><td>형식 오류 메시지 표시</td></tr>
+              <tr><td>중복</td><td>같은 사용자가 동일 내용으로 재등록</td><td>정책에 따라 차단 또는 덮어쓰기 확인</td></tr>
+              <tr><td>권한</td><td>일반 사용자가 관리자 주소 접근</td><td>접근 거부 또는 로그인 화면 이동</td></tr>
+              <tr><td>네트워크</td><td>저장 중 인터넷 연결 끊김</td><td>실패 안내 및 재시도 방법 표시</td></tr>
+              <tr><td>회귀 테스트</td><td>오류 수정 후 기존 기능 재실행</td><td>기존 기능도 정상 동작</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>프로젝트 진행 체크리스트</h2>
+          <p>체크 상태는 현재 브라우저에 저장됩니다.</p>
+        </div>
+        <div class="checklist-wrap">
+          <div class="checklist" id="checklistBox">
+            <label class="check-item"><input type="checkbox"><span>사용자와 해결할 문제를 한 문장으로 작성했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>MVP에 포함할 기능을 5개 이하로 제한했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>첫 버전에서 제외할 기능을 별도로 기록했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>사용자가 누르는 순서대로 화면 흐름을 작성했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>각 기능의 입력·처리·출력·예외·권한을 정의했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>실제 데이터 연결 전에 화면을 샘플 데이터로 검증했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>서버에서도 입력값을 다시 검증하도록 했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>API 키와 비밀번호를 코드에서 분리했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>정상·오류·권한·중복 테스트를 수행했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>배포 전 백업과 롤백 방법을 확인했다.</span></label>
+            <label class="check-item"><input type="checkbox"><span>사용자 안내와 관리자 운영 방법을 문서화했다.</span></label>
+          </div>
+          <aside class="progress-card">
+            <div class="badge">진행률</div>
+            <div class="progress-number"><span id="progressNum">0</span>%</div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <p id="progressText" style="margin:0;color:var(--muted)">문제 정의부터 시작하세요.</p>
+            <button class="btn btn-secondary" id="resetBtn" style="margin-top:16px;width:100%">체크 초기화</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="template">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>바이브코딩 프로젝트 정의서</h2>
+          <p>아래 내용을 채운 뒤 AI에게 전달하면 코드 생성 전에 요구사항을 정리할 수 있습니다.</p>
+        </div>
+        <div class="template">
+          <textarea id="projectTemplate"># 1. 프로젝트 개요
+- 프로젝트명:
+- 해결하려는 문제:
+- 주요 사용자:
+- 기대 효과:
+- 성공 기준:
+
+# 2. 사용자 시나리오
+1.
+2.
+3.
+
+# 3. MVP 기능
+1.
+2.
+3.
+
+# 4. 이번 버전에서 제외할 기능
+1.
+2.
+
+# 5. 화면 목록
+- 화면명:
+  - 목적:
+  - 주요 구성요소:
+  - 사용자가 수행하는 행동:
+
+# 6. 기능 명세
+- 기능명:
+- 입력:
+- 처리:
+- 출력:
+- 예외 상황:
+- 권한:
+- 완료 조건:
+
+# 7. 데이터 구조
+- 항목명 / 자료형 / 필수 여부 / 검증 규칙 / 설명
+
+# 8. 기술 및 운영 조건
+- 사용 가능한 플랫폼:
+- 로그인 필요 여부:
+- 예상 사용자 수:
+- 개인정보 포함 여부:
+- 관리자 필요 여부:
+- 배포 환경:
+
+# 9. 테스트 항목
+- 정상 입력:
+- 빈값:
+- 잘못된 형식:
+- 중복:
+- 권한:
+- 네트워크 오류:
+- 모바일 화면:
+
+# 10. AI에게 지시할 개발 방식
+- 전체 코드를 한 번에 작성하지 말 것
+- 먼저 설계와 파일 구조를 제시할 것
+- 기능을 하나씩 구현할 것
+- 각 단계마다 테스트 방법을 제시할 것
+- 기존 기능을 임의로 삭제하거나 변경하지 말 것
+- 불명확한 내용은 추측하지 말고 결정 필요 항목으로 표시할 것</textarea>
+          <div class="hero-actions" style="margin-top:14px">
+            <button class="btn btn-primary" id="copyTemplate">정의서 복사</button>
+            <button class="btn btn-secondary" onclick="window.print()">인쇄·PDF 저장</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap two-col">
+        <div class="notice">
+          <h3>학교 현장에서 특히 주의할 사항</h3>
+          <p style="margin:0">
+            학생·학부모·교직원의 개인정보를 실제 개발·테스트 데이터로 사용하지 마세요.
+            최소 수집, 접근 권한, 보관 기간, 삭제 방법을 먼저 정하고,
+            외부 AI 서비스에 민감한 정보를 그대로 입력하지 않아야 합니다.
+          </p>
+        </div>
+        <div class="card">
+          <h3>AI에게 맡길 일과 사람이 결정할 일</h3>
+          <p>
+            AI는 아이디어 확장, 코드 초안, 테스트 목록, 오류 원인 후보를 제시하는 데 유용합니다.
+            그러나 문제 정의, 개인정보 처리, 권한 정책, 최종 검증, 배포 책임은 사람이 결정해야 합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-box">
+        <div>
+          <strong>좋은 바이브코딩은 좋은 개발 프로세스에서 시작됩니다.</strong>
+          <p style="margin:8px 0 0;color:#b9c4df">요구사항을 작게 나누고, 단계별로 검증하며, 결과를 기록하세요.</p>
+          <p style="margin:16px 0 0;color:#9faac4;font-size:13px">
+            제작자: 동글쌤 · © 2026 동글쌤. All rights reserved.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="#process">처음부터 다시 보기</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        const text = btn.parentElement.innerText.replace('복사','').replace('AI 요청 예시','').trim();
+        await navigator.clipboard.writeText(text);
+        const old = btn.textContent;
+        btn.textContent = '복사됨';
+        setTimeout(()=>btn.textContent=old,1200);
+      });
+    });
+
+    const boxes = [...document.querySelectorAll('#checklistBox input[type="checkbox"]')];
+    const progressNum = document.getElementById('progressNum');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+
+    function safeStorageGet(key){
+      try { return localStorage.getItem(key); } catch(e) { return null; }
+    }
+    function safeStorageSet(key, value){
+      try { localStorage.setItem(key, value); } catch(e) { /* 저장이 막힌 환경에서는 현재 화면에서만 유지 */ }
+    }
+
+    function updateProgress(){
+      const checked = boxes.filter(b=>b.checked).length;
+      const percent = Math.round(checked / boxes.length * 100);
+      progressNum.textContent = percent;
+      progressFill.style.width = percent + '%';
+
+      if(percent === 0) progressText.textContent = '문제 정의부터 시작하세요.';
+      else if(percent < 40) progressText.textContent = '기획과 기능 정의를 구체화하는 단계입니다.';
+      else if(percent < 75) progressText.textContent = '구현과 연결을 진행하고 있습니다.';
+      else if(percent < 100) progressText.textContent = 'QA와 배포 전 점검이 남았습니다.';
+      else progressText.textContent = '배포 가능한 기본 준비가 완료되었습니다.';
+
+      safeStorageSet('vibeCodingChecklist', JSON.stringify(boxes.map(b=>b.checked)));
+    }
+
+    const saved = JSON.parse(safeStorageGet('vibeCodingChecklist') || '[]');
+    boxes.forEach((box,i)=>{
+      if(typeof saved[i] === 'boolean') box.checked = saved[i];
+      box.addEventListener('change', updateProgress);
+    });
+    updateProgress();
+
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      boxes.forEach(b=>b.checked=false);
+      updateProgress();
+    });
+
+    document.getElementById('copyTemplate').addEventListener('click', async (e)=>{
+      const text = document.getElementById('projectTemplate').value;
+      await navigator.clipboard.writeText(text);
+      const old = e.currentTarget.textContent;
+      e.currentTarget.textContent = '복사됨';
+      setTimeout(()=>e.currentTarget.textContent=old,1200);
+    });
+
+    // 프론트엔드-백엔드 학습용 시뮬레이션
+    const demoRecords = [];
+    const demoStudent = document.getElementById('demoStudent');
+    const demoScore = document.getElementById('demoScore');
+    const demoSend = document.getElementById('demoSend');
+    const demoClear = document.getElementById('demoClear');
+    const demoStatus = document.getElementById('demoStatus');
+    const requestLog = document.getElementById('requestLog');
+    const responseLog = document.getElementById('responseLog');
+    const demoStore = document.getElementById('demoStore');
+    const demoServerError = document.getElementById('demoServerError');
+
+    function renderDemoStore(){
+      if(!demoRecords.length){
+        demoStore.innerHTML = '<tr><td colspan="3">저장된 데이터 없음</td></tr>';
+        return;
+      }
+      demoStore.innerHTML = demoRecords.map((r,i)=>
+        `<tr><td>${i+1}</td><td>${r.student}</td><td>${r.score}</td></tr>`
+      ).join('');
+    }
+
+    function setDemoStatus(message, type=''){
+      demoStatus.textContent = message;
+      demoStatus.className = 'demo-status' + (type ? ' ' + type : '');
+    }
+
+    demoSend?.addEventListener('click', ()=>{
+      const request = {
+        method: 'POST',
+        url: '/api/activity-scores',
+        body: {
+          student: demoStudent.value.trim(),
+          score: Number(demoScore.value)
+        }
+      };
+      requestLog.textContent = JSON.stringify(request, null, 2);
+      responseLog.textContent = '{ 처리 중... }';
+      setDemoStatus('프론트엔드가 서버에 요청을 보냈습니다.');
+
+      setTimeout(()=>{
+        let response;
+        if(!request.body.student){
+          response = {status:400, ok:false, message:'학생 이름을 입력하세요.'};
+          setDemoStatus('저장 실패: 학생 이름을 입력하세요.', 'error');
+        }else if(demoScore.value === '' || !Number.isFinite(request.body.score) || request.body.score < 0 || request.body.score > 100){
+          response = {status:400, ok:false, message:'점수는 0부터 100 사이여야 합니다.'};
+          setDemoStatus('저장 실패: 점수 범위를 확인하세요.', 'error');
+        }else if(demoServerError.checked){
+          response = {status:500, ok:false, message:'가상 서버 내부 오류가 발생했습니다.'};
+          setDemoStatus('서버 오류: 잠시 후 다시 시도하도록 안내합니다.', 'error');
+        }else{
+          const saved = {id:demoRecords.length+1, ...request.body};
+          demoRecords.push(saved);
+          response = {status:201, ok:true, message:'저장되었습니다.', data:saved};
+          setDemoStatus('저장 성공: 백엔드의 응답을 받아 화면을 갱신했습니다.', 'ok');
+          renderDemoStore();
+        }
+        responseLog.textContent = JSON.stringify(response, null, 2);
+      }, 550);
+    });
+
+    demoClear?.addEventListener('click', ()=>{
+      demoRecords.length = 0;
+      demoStudent.value = '김학생';
+      demoScore.value = '85';
+      demoServerError.checked = false;
+      requestLog.textContent = '{ 아직 요청이 없습니다 }';
+      responseLog.textContent = '{ 아직 응답이 없습니다 }';
+      setDemoStatus('입력 후 저장 요청 버튼을 눌러보세요.');
+      renderDemoStore();
+    });
+
+    // 라이브러리 목적별 필터
+    const filterButtons = [...document.querySelectorAll('.filter-btn')];
+    const libraryCards = [...document.querySelectorAll('.lib-card')];
+    filterButtons.forEach(button=>{
+      button.addEventListener('click', ()=>{
+        filterButtons.forEach(b=>b.classList.remove('active'));
+        button.classList.add('active');
+        const filter = button.dataset.filter;
+        libraryCards.forEach(card=>{
+          const tags = (card.dataset.tags || '').split(' ');
+          card.hidden = filter !== 'all' && !tags.includes(filter);
+        });
+      });
+    });
+
+  </script>
+</body>
+</html>
